@@ -17,14 +17,13 @@ def pair(iterable):
 class Root(object):
 
     def __call__(self, environ, start_response):
-        req = Request(environ)
-        meth = req.method.lower()
+        meth = environ.get('REQUEST_METHOD', 'GET').lower()
         if hasattr(self, meth):
             call = getattr(self, meth)
             if callable(call):
-                resp = call(req)
+                resp = call(environ)
                 return resp(environ, start_response)
-        resp = req.get_response(exc.HTTPMethodNotAllowed())
+        resp = exc.HTTPMethodNotAllowed()
         return resp(environ, start_response)
 
 
@@ -58,6 +57,5 @@ class Router(object):
             exp = m.match(path_info)
             if exp:
                 return obj(environ, start_response)
-        req = Request(environ)
-        resp = req.get_response(exc.HTTPNotFound())
+        resp = exc.HTTPNotFound()
         return resp(environ, start_response)

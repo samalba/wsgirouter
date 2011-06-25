@@ -5,14 +5,16 @@ import router
 
 class Hello(router.Root):
 
-    def get(self, req):
+    def get(self, environ):
+        req = Request(environ)
         name = req.path_info.split('/').pop()
         return Response('Hello ' + name)
 
 
 class Yo(router.Root):
 
-    def get(self, req):
+    def get(self, environ):
+        req = Request(environ)
         name = req.path_info.split('/').pop()
         return Response('Yo ' + name)
 
