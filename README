@@ -6,7 +6,9 @@ It contains two parts so far:
 - A Router class which is basically an URL router.
 - A Root class from you can inherit to create a cleaner App class.
 
-Here is an example:
+All you need is to import the file router.py.
+
+Here is a very simple Hello World example:
 
     from webob import Request, Response, exc
     import router
