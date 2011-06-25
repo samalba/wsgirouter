@@ -23,10 +23,10 @@ if __name__ == '__main__':
     from wsgiref.simple_server import make_server
     urls = router.Router()
     urls['*'] = (
-            '/.*', Hello()
+            '^/.*', Hello()
             )
     urls['toto.com'] = (
-            '/.*', Yo()
+            '^/.*', Yo()
             )
     print 'http://localhost:4242/'
     make_server('localhost', 4242, urls).serve_forever()
