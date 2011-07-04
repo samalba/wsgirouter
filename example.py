@@ -8,7 +8,8 @@ class Hello(router.Root):
     def get(self, environ):
         req = Request(environ)
         name = req.path_info.split('/').pop()
-        return Response('Hello ' + name)
+        resp = Response('Hello ' + name)
+        return resp
 
 
 class Yo(router.Root):

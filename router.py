@@ -18,7 +18,7 @@
 # SOFTWARE.
 
 import re
-from webob import exc
+from webob import Response, exc
 
 
 def pair(iterable):
@@ -38,7 +38,10 @@ class Root(object):
         if hasattr(self, meth):
             call = getattr(self, meth)
             if callable(call):
-                resp = call(environ)
+                try:
+                    resp = call(environ)
+                except exc.HTTPException as resp:
+                    pass
                 return resp(environ, start_response)
         resp = exc.HTTPMethodNotAllowed()
         return resp(environ, start_response)
