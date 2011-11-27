@@ -1,9 +1,9 @@
 
 from webob import Request, Response, exc
-import router
+import wsgirouter
 
 
-class Hello(router.Root):
+class Hello(wsgirouter.Root):
 
     def get(self, environ):
         req = Request(environ)
@@ -12,7 +12,7 @@ class Hello(router.Root):
         return resp
 
 
-class Yo(router.Root):
+class Yo(wsgirouter.Root):
 
     def get(self, environ):
         req = Request(environ)
@@ -22,7 +22,7 @@ class Yo(router.Root):
 
 if __name__ == '__main__':
     from wsgiref.simple_server import make_server
-    urls = router.Router()
+    urls = wsgirouter.Router()
     urls['*'] = (
             '^/.*', Hello()
             )

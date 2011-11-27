@@ -6,14 +6,12 @@ It contains two parts so far:
 - A Router class which is basically an URL router.
 - A Root class from you can inherit to create a cleaner App class.
 
-All you need is to import the file router.py.
-
 Here is a very simple Hello World example:
 
     from webob import Request, Response, exc
-    import router
+    import wsgirouter
 
-    class Hello(router.Root):
+    class Hello(wsgirouter.Root):
 
         def get(self, environ):
             req = Request(environ)
@@ -22,7 +20,7 @@ Here is a very simple Hello World example:
 
     if __name__ == '__main__':
         from wsgiref.simple_server import make_server
-        urls = router.Router()
+        urls = wsgirouter.Router()
         # Here we add an URL on the "default" vhost, like a catch-all.
         urls['*'] = (
                 '^/hello/.*$', Hello()
